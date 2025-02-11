@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Wish</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .letter {
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            border: 2px solid #e60073;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: height 0.5s ease;
+            margin: 0 auto; /* Added this to center the letter */
+        }
+        .letter.closed {
+            height: 50px;
+        }
+        .letter-content {
+            display: none;
+            padding: 20px;
+        }
+        .letter.open .letter-content {
+            display: block;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #e60073;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .button:hover {
+            background-color: #d10066;
+        }
+        .response {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        .hellokitty {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="letter closed" id="letter">
+            <div class="letter-content">
+                <p>hmphh, hey wasiiiiii,</p>
+                <p>Will you be my valentine?</p>
+                <div class="buttons">
+                    <button class="button" id="yesButton">Yes</button>
+                    <button class="button" id="noButton">No</button>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="button" id="openButton">Open Letter</button>
+            <button class="button" id="closeButton" style="display:none;">Close Letter</button>
+        </div>
+        <div class="response" id="response"></div>
+        <div class="hellokitty" id="hellokitty">
+            <img src="https://media.giphy.com/media/3ohzdQ1IynzclJldUQ/giphy.gif" alt="Happy HelloKitty">
+        </div>
+    </div>
+
+    <script>
+        const letter = document.getElementById('letter');
+        const openButton = document.getElementById('openButton');
+        const closeButton = document.getElementById('closeButton');
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const response = document.getElementById('response');
+        const hellokitty = document.getElementById('hellokitty');
+        let noClickCount = 0;
+
+        openButton.addEventListener('click', () => {
+            letter.classList.remove('closed');
+            letter.classList.add('open');
+            openButton.style.display = 'none';
+            closeButton.style.display = 'inline-block';
+        });
+
+        closeButton.addEventListener('click', () => {
+            letter.classList.remove('open');
+            letter.classList.add('closed');
+            openButton.style.display = 'inline-block';
+            closeButton.style.display = 'none';
+            response.style.display = 'none';
+            hellokitty.style.display = 'none';
+            noClickCount = 0;
+            noButton.style.display = 'inline-block';
+            yesButton.style.transform = 'scale(1)';
+        });
+
+        yesButton.addEventListener('click', () => {
+            response.style.display = 'block';
+            response.textContent = 'I knew it babyyy, lesgooo on 14th my love';
+            hellokitty.style.display = 'block';
+        });
+
+        noButton.addEventListener('click', () => {
+            response.style.display = 'block';
+            noClickCount++;
+            if (noClickCount === 1) {
+                response.textContent = 'why no, cutie? :(';
+            } else if (noClickCount === 2) {
+                response.textContent = 'Again? hey what do you think you are doing';
+            } else if (noClickCount === 3) {
+                response.textContent = 'comeon love say yes';
+            } else if (noClickCount === 4) {
+                response.textContent = 'again huh?';
+            } else if (noClickCount === 5) {
+                response.textContent = 'still? Not even a tiny yes?';
+            } else if (noClickCount === 6) {
+                response.textContent = 'im not giving up dw cutie';
+            } else if (noClickCount === 7) {
+                response.textContent = 'you really dont listen huh baby?';
+            } else if (noClickCount === 8) {
+                response.textContent = 'oh comeon cupcake, still?';
+            } else if (noClickCount === 9) {
+                response.textContent = 'aren’t you being a bit too cruel now?';
+            } else if (noClickCount === 10) {
+                response.textContent = 'hahaha ur mine anyways :)';
+                noButton.style.display = 'none';
+            }
+
+            // Incrementally scale the "Yes" button
+            let scaleValue = 1 + (noClickCount * 0.1);
+            yesButton.style.transform = `scale(${scaleValue})`;
+        });
+    </script>
+</body>
+</html>
